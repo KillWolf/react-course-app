@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import './App.css';
+import classes from './App.css';
 import Person from './Person/Person'
+import ErrorBoundary from './ErrorBoundary/ErrorBoundary'
 
 class App extends Component {
   state = {
@@ -47,32 +48,33 @@ class App extends Component {
       persons = (
         <div>
           {this.state.persons.map((person, index) => {
-            return <Person
-              name={person.name}
-              age={person.age}
-              key={person.id}
-              changed={(event) => this.nameChangedHandler(event, person.id)}
-              click={() => this.deletePersonHandler(index)} />
+            return <ErrorBoundary key={person.id}>
+              <Person
+                name={person.name}
+                age={person.age}
+                changed={(event) => this.nameChangedHandler(event, person.id)}
+                click={() => this.deletePersonHandler(index)} />
+            </ErrorBoundary>
           })}
         </div>
       )
     }
 
-    const classes = [];
+    const assignedClasses = [];
 
     if (this.state.persons.length <= 2) {
-      classes.push('waitingListBold')
+      assignedClasses.push(classes.waitingListBold)
     }
 
     if (this.state.persons.length === 0) {
-      classes.push('waitingListGreen')
+      assignedClasses.push(classes.waitingListGreen)
     }
 
     return (
-      <div className="App">
+      <div className={classes.App}>
         <h1>Hi, I'm a React App</h1>
-        <p className={classes.join(' ')}>{this.state.persons.length} person{this.state.persons.length === 1 ? '' : 's' } on waiting list.</p>
-        <button className={this.state.showPersons ? 'toggleButtonOff' : 'toggleButtonOn'} onClick={this.togglePersonsHandler}>Toggle persons</button>
+        <p className={assignedClasses.join(' ')}>{this.state.persons.length} person{this.state.persons.length === 1 ? '' : 's'} on waiting list.</p>
+        <button className={this.state.showPersons ? classes.toggleButtonOff : classes.toggleButtonOn} onClick={this.togglePersonsHandler}>Toggle persons</button>
         {persons}
       </div>
     );
