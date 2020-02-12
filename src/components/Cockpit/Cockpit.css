@@ -1,0 +1,25 @@
+.toggleButtonOn {
+    background-color: green;
+    color: white;
+    font: inherit;
+    border: 1px solid black;
+    padding: 8px;
+    cursor: pointer;
+  }
+  
+  .toggleButtonOff {
+    background-color: red;
+    color: white;
+    font: inherit;
+    border: 1px solid black;
+    padding: 8px;
+    cursor: pointer;
+  }
+  
+  .waitingListBold {
+    font-weight: 700;
+  }
+  
+  .waitingListGreen {
+    color: green;
+  }
